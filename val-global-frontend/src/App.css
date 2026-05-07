@@ -1,0 +1,12 @@
+main { overflow-x: hidden; }
+
+/* ─── RESPONSIVE OVERRIDES ─── */
+@media(max-width:860px){
+  .trust-strip { grid-template-columns:repeat(2,1fr) !important; }
+}
+@media(max-width:480px){
+  .trust-strip { grid-template-columns:1fr !important; }
+}
+@media(max-width:600px){
+  .form-row-grid { grid-template-columns:1fr !important; }
+}
