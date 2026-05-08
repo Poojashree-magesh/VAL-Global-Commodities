@@ -21,7 +21,13 @@ export default function Features() {
         .trust-title { display:block; font-size:0.95rem; font-weight:800; color:#fff; margin-bottom:4px; font-family:'Plus Jakarta Sans',sans-serif; }
         .trust-sub { font-size:0.8rem; color:rgba(255,255,255,0.46); }
         @media(max-width:860px){ .trust-strip{grid-template-columns:1fr 1fr;} .trust-item{border-bottom:1px solid rgba(255,255,255,0.06);} }
-        @media(max-width:500px){ .trust-strip{grid-template-columns:1fr;} }
+        @media(max-width:500px){
+          .trust-strip{grid-template-columns:1fr;}
+          .trust-item { padding:1.2rem 1rem; gap:12px; }
+          .trust-ico { width:50px; height:50px; font-size:22px; }
+          .trust-title { font-size:0.86rem; }
+          .trust-sub { font-size:0.74rem; }
+        }
       `}</style>
       <StaggerReveal tag="div" className="trust-strip stagger">
         {features.map((f, i) => (

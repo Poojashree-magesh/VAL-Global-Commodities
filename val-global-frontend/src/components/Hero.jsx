@@ -173,6 +173,23 @@ export default function Hero() {
           font-size: 0.76rem; color: rgba(255,255,255,0.48);
           font-weight: 500; letter-spacing: 0.03em;
         }
+        .hero-infobar-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          border-radius: 999px;
+        }
+        .hero-infobar-link {
+          color: inherit;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          border-radius: 999px;
+          transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
         .hero-infobar-sep { color: rgba(245,168,0,0.35); }
 
         @media(max-width:900px){
@@ -182,8 +199,33 @@ export default function Hero() {
           .hero-scroll { display: none; }
         }
         @media(max-width:600px){
-          .hero-logo-right { width: 160px; }
-          .hero-infobar { flex-direction: column; gap: 0.4rem; padding: 12px 5%; }
+          .hero-root { min-height: auto; padding-top: 88px; padding-bottom: 170px; }
+          .hero-inner { padding: 0 5%; gap: 1.4rem; }
+          .hero-logo-right { width: 150px; }
+          .hero-h1 { font-size: clamp(2rem, 10vw, 2.8rem); line-height: 1.02; }
+          .hero-desc { font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.8rem; }
+          .hero-btns { gap: 0.65rem; margin-bottom: 1.2rem; flex-direction: column; align-items: stretch; }
+          .hero-btns .btn-gold, .hero-btns .btn-outline { width: 100%; justify-content: center; text-align: center; }
+          .hero-btns .btn-outline { border-color: rgba(255,255,255,0.65); color: #fff; }
+          .hero-markets { display: flex; gap: 0.3rem; margin-top: 0.3rem; }
+          .hero-mkt { padding: 35px 10px; margin-bottom: 2rem; font-size: 0.74rem; color: rgba(255,255,255,0.75); }
+          .hero-infobar { flex-direction: column; gap: 0.4rem; padding: 30px 5%; }
+          .hero-infobar-sep { display: none; }
+          .hero-infobar-item { text-align: center; width: 100%; }
+          .hero-infobar-pill {
+            width: 100%;
+            padding: 7px 12px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.88);
+          }
+          .hero-infobar-link {
+            width: 100%;
+            padding: 7px 12px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.88);
+          }
         }
       `}</style>
 
@@ -251,12 +293,13 @@ export default function Hero() {
 
         {/* Info bar */}
         <div className="hero-infobar">
-          <span className="hero-infobar-item">
+          <span className="hero-infobar-item hero-infobar-pill">
             ✉️ info@valglobalcommodities.com
           </span>
           <span className="hero-infobar-sep">·</span>
           <span className="hero-infobar-item">
             <a
+              className="hero-infobar-link"
               href="https://www.valglobalcommodities.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -271,13 +314,14 @@ export default function Hero() {
             style={{ display: "flex", alignItems: "center", gap: "6px" }}
           >
             <a
+              className="hero-infobar-link"
               href="https://www.instagram.com/valglobalcommodities"
               target="_blank"
               rel="noopener noreferrer"
               style={{
                 color: "inherit",
                 textDecoration: "none",
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
               }}
@@ -320,7 +364,7 @@ export default function Hero() {
             </a>
           </span>
           <span className="hero-infobar-sep">·</span>
-          <span className="hero-infobar-item">📍 India</span>
+          <span className="hero-infobar-item hero-infobar-pill">📍 India</span>
         </div>
       </section>
     </>

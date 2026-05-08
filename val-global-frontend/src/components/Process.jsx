@@ -24,7 +24,15 @@ export default function Process() {
         .process-step-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:800; color:#fff; margin-bottom:0.55rem; }
         .process-step-desc { font-size:0.86rem; color:rgba(255,255,255,0.5); line-height:1.65; }
         @media(max-width:900px){ .process-track{grid-template-columns:repeat(3,1fr);gap:2.5rem;} .process-track::before{display:none;} }
-        @media(max-width:560px){ .process-track{grid-template-columns:repeat(2,1fr);} }
+        @media(max-width:560px){
+          .process-section { padding:70px 5%; }
+          .process-head { margin-bottom: 3rem; }
+          .process-track{grid-template-columns:1fr; gap:2rem;}
+          .process-step { padding:0; }
+          .process-circle { width:100px; height:100px; font-size:38px; margin-bottom:1rem; }
+          .process-step-title { font-size:0.94rem; }
+          .process-step-desc { font-size:0.82rem; line-height:1.55; }
+        }
       `}</style>
 
       <section className="process-section" id="process">

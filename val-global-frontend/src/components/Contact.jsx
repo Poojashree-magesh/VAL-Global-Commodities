@@ -122,8 +122,8 @@ export default function Contact() {
         .cta-desc { color:rgba(255,255,255,0.62); font-size:1.1rem; margin-bottom:2.5rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.85; }
         .cta-btns { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
         /* Contact section — NO WATERMARK */
-        .contact-brand { display: flex; align-items: center; justify-content: flex-start; gap: 24px; margin-top: 40px; min-height: 260px; }
-        .contact-logo { width: 560px; max-width: 100%; }
+        .contact-brand { display:flex; align-items:center; justify-content:space-around; gap:1.5rem; margin-top:2rem; min-height:0; width:100%; }
+        .contact-logo { width:320px; max-width:48%; }
         .contact-text { display: flex; flex-direction: column; }
         .contact-brand-title { font-size: 1.2rem; font-weight: 700; color: #1F4D3B; margin-bottom: 5px; }
         .contact-brand-tagline { font-size: 2.2rem; color: #555; line-height: 1.4; font-weight: 300; font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: -0.01em; }
@@ -133,9 +133,8 @@ export default function Contact() {
         .contact-info-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem; font-weight:800; color:#1F4D3B; margin-bottom:1rem; letter-spacing:-0.02em; }
         .contact-info-text { font-size:1rem; color:#555; line-height:1.9; margin-bottom:2rem; }
         .contact-brand { margin-bottom: 0; }
-        .contact-logo { width: 320px; }
         .contact-brand-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; font-weight: 800; color: #1F4D3B; margin-bottom: 0.4rem; }
-        .contact-brand-tagline { font-size: 2rem; color: #888; line-height: 1.45; font-family: 'Playfair Display', serif; font-style: italic; }
+        .contact-brand-tagline { font-size: 2rem; color: #888; line-height: 1.45; font-family: 'Playfair Display', serif; font-style: italic; text-align:center; }
         .info-items { display:flex; flex-direction:column; gap:1.3rem; }
         .info-item { display:flex; align-items:flex-start; gap:16px; transition:transform 0.2s; }
         .info-item:hover { transform:translateX(5px); }
@@ -163,8 +162,29 @@ export default function Contact() {
         .msg-error { background:#fdecea; border-left:3px solid #c62828; padding:15px 17px; margin-bottom:1.5rem; font-size:0.95rem; color:#c62828; font-weight:600; }
         .finput::placeholder { color: #aaa; font-weight: 400; }
         @media(max-width:1024px){ .contact-grid{grid-template-columns:1fr;gap:3rem;} }
-        @media(max-width:600px){ .form-row-grid{grid-template-columns:1fr;} .cta-title{font-size:clamp(1.9rem,7vw,2.6rem);} .form-wrap{padding:2rem;} }
-        @media(max-width:600px){ .name-row { grid-template-columns: 1fr; }}
+        @media(max-width:600px){
+          .cta-banner { padding:70px 5%; }
+          .cta-title{font-size:clamp(1.9rem,7vw,2.6rem);}
+          .cta-desc { font-size:0.95rem; line-height:1.7; margin-bottom:1.6rem; }
+          .cta-btns { flex-direction:column; align-items:stretch; }
+          .cta-btns .btn-gold, .cta-btns .btn-outline { width:100%; justify-content:center; text-align:center; }
+          .contact-section { padding:70px 5%; }
+          .contact-head { margin-bottom:2rem; }
+          .contact-info-title { font-size:1.2rem; }
+          .contact-info-text { font-size:0.92rem; line-height:1.7; }
+          .contact-brand { flex-direction:row; justify-content:space-around; align-items:center; gap:0.8rem; margin-top:20px; }
+          .contact-logo { width:180px; max-width:44%; }
+          .contact-brand-tagline { font-size:1.05rem; line-height:1.35; text-align:left; }
+          .form-wrap{padding:1.2rem;}
+          .form-head { font-size:0.95rem; margin-bottom:1.2rem; }
+          .name-row { grid-template-columns: 1fr; }
+          .form-row-grid{grid-template-columns:1fr;}
+        }
+        @media(max-width:420px){
+          .contact-brand { gap:0.6rem; justify-content:space-around; }
+          .contact-logo { width:145px; max-width:46%; }
+          .contact-brand-tagline { font-size:0.9rem; line-height:1.3; }
+        }
       `}</style>
 
       {/* CTA Banner — NO WATERMARK */}

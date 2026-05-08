@@ -192,8 +192,7 @@ export default function Products() {
          .prod-card { background:#fff; overflow:hidden; transition:transform 0.35s, box-shadow 0.35s; cursor:pointer; display:flex; flex-direction:column; height:100%; }
          .prod-card:hover { transform:translateY(-8px); box-shadow:0 28px 64px rgba(31,77,59,0.13); }
          .prod-img { height:190px; overflow:hidden; position:relative; background:#eae6e0; }
-         .prod-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.7s; }
-         .prod-card:hover .prod-img img { transform:scale(1.08); }
+         .prod-img img { width:100%; height:100%; object-fit:cover; }
          .prod-cat-badge { position:absolute; top:12px; left:12px; background:#1F4D3B; color:#fff; font-size:0.6rem; font-weight:700; padding:4px 10px; }
          /* New badge colour for the 3 new categories */
          .prod-cat-badge.badge-poultry  { background:#8B5E3C; }
@@ -206,8 +205,20 @@ export default function Products() {
          .prod-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; }
          .prod-tag { background:#F5F3EF; color:#8B5E3C; font-size:0.64rem; padding:3px 10px; }
          @media(max-width:1100px){ .products-grid{ grid-template-columns:repeat(3,1fr); } }
-         @media(max-width:768px) { .products-grid{ grid-template-columns:repeat(2,1fr); } }
-         @media(max-width:480px) { .products-grid{ grid-template-columns:1fr; } }
+         @media(max-width:768px) {
+           .products-section { padding:80px 5%; }
+           .products-header { margin-bottom:2rem; }
+           .products-grid{ grid-template-columns:repeat(2,1fr); gap:1rem; }
+           .prod-body { padding:1rem; }
+           .prod-items { min-height:0; }
+         }
+         @media(max-width:480px) {
+           .products-grid{ grid-template-columns:1fr; }
+           .filter-btn { font-size:0.68rem; padding:7px 12px; }
+           .prod-img { height:170px; }
+           .prod-title { font-size:0.88rem; }
+           .prod-items { font-size:0.78rem; line-height:1.5; }
+         }
       `}</style>
 
       <section className="products-section" id="products">

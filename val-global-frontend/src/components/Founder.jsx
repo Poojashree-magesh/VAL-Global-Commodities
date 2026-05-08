@@ -1,4 +1,4 @@
-import SectionReveal from './SectionReveal'
+import SectionReveal from "./SectionReveal";
 
 export default function Founder() {
   return (
@@ -26,6 +26,18 @@ export default function Founder() {
         .founder-sig { font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:#8B5E3C; display:flex; align-items:center; gap:12px; margin-top:2rem; }
         .founder-sig-line { width:28px; height:1px; background:#8B5E3C; }
         @media(max-width:1024px){ .founder-grid{grid-template-columns:1fr;} .founder-img-col{min-height:400px;} .founder-img-overlay{background:linear-gradient(to bottom,transparent 60%,#fff 100%);} .founder-info-card{left:20px;bottom:20px;} .founder-text-col{padding:3rem 0 0;} }
+        @media(max-width:600px){
+          .founder-section { padding:70px 5%; }
+          .founder-img-col { min-height:320px; }
+          .founder-info-card { left:12px; right:12px; bottom:12px; min-width:0; padding:1.1rem 1rem; }
+          .founder-initial { width:44px; height:44px; font-size:1.25rem; margin-bottom:0.6rem; }
+          .founder-name { font-size:0.88rem; }
+          .founder-role, .founder-contact { font-size:0.7rem; }
+          .founder-quote { font-size:1.05rem; padding-left:1rem; line-height:1.55; }
+          .founder-para { font-size:0.92rem; line-height:1.75; }
+          .founder-cta-box { padding:1rem; margin-top:1.3rem; }
+          .founder-sig { font-size:0.9rem; margin-top:1.3rem; }
+        }
       `}</style>
 
       <section className="founder-section" id="founder">
@@ -41,7 +53,9 @@ export default function Founder() {
                 <div className="founder-initial">V</div>
                 <div className="founder-name">Founder &amp; Director</div>
                 <div className="founder-role">VAL Global Commodities</div>
-                <div className="founder-contact">✉️ info@valglobalcommodities.com</div>
+                <div className="founder-contact">
+                  ✉️ info@valglobalcommodities.com
+                </div>
                 <div className="founder-contact">📍 India</div>
               </div>
             </div>
@@ -50,24 +64,57 @@ export default function Founder() {
           <SectionReveal className="reveal-right" delay="0.12s">
             <div className="founder-text-col">
               <div className="eyebrow">Founder's Note</div>
-              <h2 className="stitle">A Vision Born from<br/>the Heart of the Farm</h2>
+              <h2 className="stitle">
+                A Vision Born from
+                <br />
+                the Heart of the Farm
+              </h2>
               <div className="divider"></div>
               <blockquote className="founder-quote">
-                "We built VAL Global Commodities to bridge the gap between farms and global buyers —
-                with trust, consistency, and authenticity at the centre of everything we do."
+                "We built VAL Global Commodities to bridge the gap between farms
+                and global buyers — with trust, consistency, and authenticity at
+                the centre of everything we do."
               </blockquote>
-              <p className="founder-para">VAL Global Commodities was built from a deep understanding of the gap between farm production and global market expectations. We saw first-hand how quality produce struggled to reach the right buyers at fair prices — and we set out to change that.</p>
-              <p className="founder-para">We created a system where products move directly from trusted sources to buyers without compromising on quality, traceability, or integrity.</p>
+              <p className="founder-para">
+                VAL Global Commodities was built from a deep understanding of
+                the gap between farm production and global market expectations.
+                We saw first-hand how quality produce struggled to reach the
+                right buyers at fair prices — and we set out to change that.
+              </p>
+              <p className="founder-para">
+                We created a system where products move directly from trusted
+                sources to buyers without compromising on quality, traceability,
+                or integrity.
+              </p>
               <div className="founder-cta-box">
                 <div className="founder-cta-label">Get in Touch Directly</div>
-                <a href="mailto:info@valglobalcommodities.com" className="founder-cta-link">✉️ info@valglobalcommodities.com</a>
-                <a href="#contact" className="btn-gold" style={{marginTop:'0.9rem',width:'fit-content',fontSize:'0.8rem',padding:'13px 26px'}}>Request a Catalogue →</a>
+                <a
+                  href="mailto:info@valglobalcommodities.com"
+                  className="founder-cta-link"
+                >
+                  ✉️ info@valglobalcommodities.com
+                </a>
+                <a
+                  href="#contact"
+                  className="btn-gold"
+                  style={{
+                    marginTop: "0.9rem",
+                    width: "fit-content",
+                    fontSize: "0.8rem",
+                    padding: "13px 26px",
+                  }}
+                >
+                  Request a Catalogue →
+                </a>
               </div>
-              <div className="founder-sig"><span className="founder-sig-line"></span>Founder, VAL Global Commodities</div>
+              <div className="founder-sig">
+                <span className="founder-sig-line"></span>Founder, VAL Global
+                Commodities
+              </div>
             </div>
           </SectionReveal>
         </div>
       </section>
     </>
-  )
+  );
 }

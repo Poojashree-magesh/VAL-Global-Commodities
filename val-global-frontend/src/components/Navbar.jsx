@@ -120,7 +120,12 @@ export default function Navbar() {
           .ham-btn { display: flex; }
         }
         @media(max-width:420px){
-          .nav-brand-name { font-size: 0.8rem; }
+          .nav-root { height: 66px; padding: 0 4%; }
+          .mobile-menu { top: 66px; padding: 1.2rem 4%; }
+          .nav-logo-img { height: 40px; margin-top: 3.5px; }
+          .nav-brand-name { font-size: 0.72rem; margin-top: 8px; }
+          .nav-brand-sub { font-size: 0.52rem; letter-spacing: 0.12em; }
+          .mobile-link { font-size: 0.96rem; padding: 12px 0; }
         }
       `}</style>
 

@@ -40,7 +40,21 @@ export default function WhyUs() {
         .why-bullet-arrow { color:#E8531A; font-size:0.78rem; }
         .why-bullet-text { font-family:'Plus Jakarta Sans',sans-serif; font-size:0.88rem; font-weight:600; color:rgba(255,255,255,0.72); }
         @media(max-width:900px){ .why-grid{grid-template-columns:repeat(2,1fr);} .why-stats{grid-template-columns:repeat(2,1fr);} }
-        @media(max-width:560px){ .why-grid{grid-template-columns:1fr;} .why-bullets{flex-direction:column;} .why-bullet{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);} }
+        @media(max-width:560px){
+          .why-section { padding:70px 5%; }
+          .why-top { gap:1.2rem; margin-bottom:2rem; }
+          .why-stats { grid-template-columns:1fr; margin-bottom:2rem; }
+          .why-stat { padding:1.2rem 1rem; border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); }
+          .why-stat:last-child { border-bottom:none; }
+          .why-stat-val { font-size:2rem; }
+          .why-grid{grid-template-columns:1fr;}
+          .why-card { padding:1.4rem 1rem; }
+          .why-card-title { font-size:0.96rem; }
+          .why-card-desc { font-size:0.84rem; line-height:1.6; }
+          .why-bullets{flex-direction:column;}
+          .why-bullet{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06); min-width:0; padding:0.9rem 1rem;}
+          .why-bullet-text { font-size:0.8rem; }
+        }
       `}</style>
 
       <section className="why-section" id="why">

@@ -49,6 +49,16 @@ export default function GlobalReach() {
           font-style: italic;
         }
         @media(max-width:1024px){ .reach-grid{grid-template-columns:1fr;gap:3.5rem;} }
+        @media(max-width:600px){
+          .reach-section { padding:70px 5%; }
+          .reach-grid { gap:2rem; }
+          .reach-vision { padding:1.2rem; margin-top:1.3rem; }
+          .reach-market { gap:0.9rem; padding:1.1rem 0; }
+          .reach-flag { font-size:2.1rem; }
+          .reach-market-name { font-size:1.02rem; }
+          .reach-market-products { font-size:0.88rem; margin-bottom:4px; line-height:1.5; }
+          .reach-market-detail { font-size:0.78rem; }
+        }
       `}</style>
 
       <section className="reach-section" id="reach">
