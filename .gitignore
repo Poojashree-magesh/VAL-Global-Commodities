@@ -1,10 +1,6 @@
 # dependencies
 node_modules/
 
-# frontend build
-dist/
-build/
-
 # backend build
 target/
 

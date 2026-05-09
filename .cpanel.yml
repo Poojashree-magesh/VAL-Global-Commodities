@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/zcmtsivgo8mu/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R val-global-frontend/dist/* $DEPLOYPATH
