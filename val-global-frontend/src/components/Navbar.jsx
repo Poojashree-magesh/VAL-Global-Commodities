@@ -69,7 +69,7 @@ export default function Navbar() {
         .nav-link {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 0.82rem; font-weight: 700;
-          color: rgba(25,25,25,0.82);
+          color: rgba(255,255,255,0.82);
           letter-spacing: 0.08em; text-transform: uppercase;
           transition: color 0.2s; text-decoration: none;
           position: relative; padding-bottom: 3px;

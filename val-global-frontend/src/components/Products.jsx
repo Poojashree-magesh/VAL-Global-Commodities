@@ -1,14 +1,27 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
-// Single subtle reveal config for the entire section.
-// Uses transform + opacity only for high FPS, with a premium easing curve.
-const SECTION_REVEAL = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-};
+const MOBILE_REVEAL_QUERY = "(max-width: 768px)";
+
+function useIsMobileRevealTarget() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia(MOBILE_REVEAL_QUERY).matches
+      : false,
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia(MOBILE_REVEAL_QUERY);
+    const handleChange = (event) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return isMobile;
+}
 
 // Build a srcSet from the base image path by appending width suffixes that
 // match the responsive variants generated under public/images.
@@ -155,6 +168,25 @@ const FILTERS = [
 
 export default function Products() {
   const [active, setActive] = useState("all");
+  const isMobileReveal = useIsMobileRevealTarget();
+
+  const sectionReveal = useMemo(
+    () =>
+      isMobileReveal
+        ? {
+            initial: { opacity: 0, y: 18 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, amount: 0.06, margin: "0px 0px 120px 0px" },
+            transition: { duration: 0.48, ease: [0.16, 1, 0.3, 1] },
+          }
+        : {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, amount: 0.12 },
+            transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+          },
+    [isMobileReveal],
+  );
 
   const filtered = useMemo(
     () =>
@@ -360,7 +392,7 @@ export default function Products() {
         className="products-section"
         id="products"
         style={{ willChange: "transform, opacity" }}
-        {...SECTION_REVEAL}
+        {...sectionReveal}
       >
         <div className="products-eyebrow">What We Offer</div>
         <h2 className="products-title">Our Product Categories</h2>
