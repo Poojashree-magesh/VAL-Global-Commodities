@@ -8,20 +8,6 @@ const quickLinks = [
   { label: "Founder's Note", href: "#founder" },
   { label: "Contact Us", href: "#contact" },
 ];
-const productLinks = [
-  "Fruits & Vegetables",
-  "Rice Varieties",
-  "Spices",
-  "Masala Blends",
-  "Poultry Products",
-  "Cooking Oils",
-  " Coconut & Coconut-Based Products",
-  "Nutri-Cereals",
-  "Natural Sweeteners",
-  "Healthy Products",
-  "Tea & Coffee",
-  "Lifestyle Products",
-];
 const contactDetails = [
   { icon: "📍", text: "India" },
   { icon: "✉️", text: "info@valglobalcommodities.com" },
@@ -59,7 +45,7 @@ export default function Footer() {
         }
 
         .footer-grid {
-          display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr;
+          display:grid; grid-template-columns:1.8fr 1fr 1fr;
           gap:4rem; padding-bottom:4rem;
           border-bottom:1px solid rgba(255,255,255,0.07);
           position:relative; z-index:2;
@@ -177,20 +163,6 @@ export default function Footer() {
                 <li key={l.label}>
                   <a href={l.href} className="footer-link">
                     {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </SectionReveal>
-
-          {/* Products */}
-          <SectionReveal className="reveal" delay="0.2s">
-            <div className="footer-col-head">Products</div>
-            <ul className="footer-links">
-              {productLinks.map((p) => (
-                <li key={p}>
-                  <a href="#products" className="footer-link">
-                    {p}
                   </a>
                 </li>
               ))}

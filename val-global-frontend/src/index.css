@@ -89,31 +89,31 @@ button {
 }
 .reveal {
   opacity: 0;
-  transform: translateY(38px);
+  transform: translateY(26px);
   transition:
-    opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-left {
   opacity: 0;
-  transform: translateX(-38px);
+  transform: translateX(-26px);
   transition:
-    opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-right {
   opacity: 0;
-  transform: translateX(38px);
+  transform: translateX(26px);
   transition:
-    opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-scale {
   opacity: 0;
   transform: scale(0.93);
   transition:
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible,
 .reveal-left.visible,
@@ -122,30 +122,9 @@ button {
   opacity: 1;
   transform: none;
 }
-/* Stagger: first 8 children */
-.stagger > *:nth-child(1) {
-  transition-delay: 0.04s;
-}
-.stagger > *:nth-child(2) {
-  transition-delay: 0.11s;
-}
-.stagger > *:nth-child(3) {
-  transition-delay: 0.18s;
-}
-.stagger > *:nth-child(4) {
-  transition-delay: 0.25s;
-}
-.stagger > *:nth-child(5) {
-  transition-delay: 0.32s;
-}
-.stagger > *:nth-child(6) {
-  transition-delay: 0.39s;
-}
-.stagger > *:nth-child(7) {
-  transition-delay: 0.46s;
-}
-.stagger > *:nth-child(8) {
-  transition-delay: 0.53s;
+/* JS controls stagger timing; keep CSS neutral to avoid double-delay. */
+.stagger > * {
+  transition-delay: 0s !important;
 }
 
 /* ══ LOGO WATERMARK ══ */

@@ -74,7 +74,7 @@ export function StaggerReveal({
         if (entry.isIntersecting) {
           // Add visible to each child sequentially
           Array.from(el.children).forEach((child, i) => {
-            setTimeout(() => child.classList.add("visible"), i * 90);
+            setTimeout(() => child.classList.add("visible"), i * 70);
           });
           observer.unobserve(el);
         }
