@@ -27,4 +27,4 @@ jobs:
             git pull origin main
             
             # 3. Tell cPanel to run the .cpanel.yml deployment
-            uapi VersionControl deploy repository_root=/home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
+            uapi VersionControlDeployment create repository_root=/home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
