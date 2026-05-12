@@ -3,7 +3,7 @@
  * Connects React frontend to Spring Boot backend at localhost:8080
  */
 
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'https://val-global-commodities-production.up.railway.app/api';
 
 // ─── Enquiries ─────────────────────────────────────────────
 
