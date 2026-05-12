@@ -3,7 +3,7 @@
  * Connects React frontend to Spring Boot backend at localhost:8080
  */
 
-const BASE_URL = 'https://val-global-commodities-production.up.railway.app/api';
+const BASE_URL = "https://val-global-commodities-production.up.railway.app/api";
 
 // ─── Enquiries ─────────────────────────────────────────────
 
@@ -13,13 +13,13 @@ const BASE_URL = 'https://val-global-commodities-production.up.railway.app/api';
  */
 export const submitEnquiry = async (formData) => {
   const response = await fetch(`${BASE_URL}/enquiries`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
   if (!response.ok) {
     const err = await response.json();
-    throw new Error(err.message || 'Failed to submit enquiry');
+    throw new Error(err.message || "Failed to submit enquiry");
   }
   return response.json();
 };
@@ -39,8 +39,8 @@ export const getAllEnquiries = async () => {
  */
 export const updateEnquiryStatus = async (id, status) => {
   const response = await fetch(`${BASE_URL}/enquiries/${id}/status`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status }),
   });
   return response.json();
