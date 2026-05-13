@@ -3,7 +3,7 @@
  * Connects React frontend to Spring Boot backend on Railway.
  */
 
-const BASE_URL = "https://val-global-commodities-production.up.railway.app/api";
+const BASE_URL = "https://api.valglobalcommodities.com/api";
 
 // ─── Enquiries ─────────────────────────────────────────────
 
