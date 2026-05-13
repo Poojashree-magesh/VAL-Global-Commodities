@@ -1,6 +1,6 @@
 /**
  * VAL Global Commodities — API Service
- * Connects React frontend to Spring Boot backend at localhost:8080
+ * Connects React frontend to Spring Boot backend on Railway.
  */
 
 const BASE_URL = "https://val-global-commodities-production.up.railway.app/api";
