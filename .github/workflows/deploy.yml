@@ -3,7 +3,7 @@ name: Deploy to GoDaddy
 on:
   push:
     branches:
-      - main  # Trigger this whenever you push to the main branch
+      - main # Trigger this whenever you push to the main branch
 
 jobs:
   deploy:
@@ -22,9 +22,10 @@ jobs:
           script: |
             # 1. Enter the repository folder
             cd /home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
-            
+
             # 2. Pull the latest code from GitHub
-            git pull origin main
-            
+            git fetch
+            git reset --hard origin/main
+
             # 3. Tell cPanel to run the .cpanel.yml deployment
             uapi VersionControlDeployment create repository_root=/home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
