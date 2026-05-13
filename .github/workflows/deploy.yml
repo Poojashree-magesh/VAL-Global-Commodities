@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: SSH and Deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: 118.139.179.249
           username: zcmtsivgo8mu
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
+          script_stop: true
           script: |
-            # 1. Enter the repository folder
+            set -e
             cd /home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
-
-            # 2. Pull the latest code from GitHub
-            git fetch
-            git reset --hard origin/main
-
-            # 3. Tell cPanel to run the .cpanel.yml deployment
+            git fetch origin
+            # Sync local main to GitHub exactly (avoids divergent-branch pull failures).
+            git checkout -B main origin/main
+            # If cPanel runs git pull afterward, ff-only avoids silent merge commits.
+            git config pull.ff only
             uapi VersionControlDeployment create repository_root=/home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
