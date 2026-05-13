@@ -47,6 +47,9 @@ public class EnquiryService {
     @Value("${app.mail.from:}")
     private String mailFrom;
 
+    @Value("${app.mail.sender-name:Val Global Commodities}")
+    private String mailSenderName;
+
     @Value("${app.mail.brevo.api-key:}")
     private String brevoApiKey;
 
@@ -114,8 +117,7 @@ public class EnquiryService {
             // true = multipart (safer for HTML emails)
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-            // ✅ MUST match your Titan SMTP username
-            helper.setFrom(mailFrom);
+            helper.setFrom(mailFrom, mailSenderName);
 
             // ✅ Admin inbox (Titan mailbox)
             helper.setTo(notificationEmail);
@@ -149,7 +151,7 @@ public class EnquiryService {
 
         Map<String, Object> sender = new HashMap<>();
         sender.put("email", mailFrom);
-        sender.put("name", "VAL Global Commodities");
+        sender.put("name", mailSenderName);
 
         Map<String, Object> toEmail = new HashMap<>();
         toEmail.put("email", notificationEmail);

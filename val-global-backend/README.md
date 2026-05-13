@@ -134,6 +134,7 @@ export CORS_ALLOWED_ORIGINS='https://your-domain.com,https://www.your-domain.com
 export MAIL_ENABLED=true
 export MAIL_TO=info@valglobalcommodities.com
 export MAIL_FROM=valglobalcommodities@gmail.com
+export MAIL_SENDER_NAME='Val Global Commodities'
 export SMTP_HOST=smtp.gmail.com
 export SMTP_PORT=587
 export SMTP_USERNAME=valglobalcommodities@gmail.com
