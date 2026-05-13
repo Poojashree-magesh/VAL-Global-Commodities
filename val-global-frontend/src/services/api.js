@@ -3,7 +3,11 @@
  * Connects React frontend to Spring Boot backend on Railway.
  */
 
-const BASE_URL = "https://api.valglobalcommodities.com/api";
+const BASE_URL =  import.meta.env.VITE_API_BASE_URL ||
+  'https://val-global-commodities-production.up.railway.app/api';
+const ENQUIRY_URL =
+  import.meta.env.VITE_ENQUIRY_URL ||
+  '/api/enquiry.php';
 
 // ─── Enquiries ─────────────────────────────────────────────
 
@@ -12,7 +16,8 @@ const BASE_URL = "https://api.valglobalcommodities.com/api";
  * Called from Contact.jsx on form submission.
  */
 export const submitEnquiry = async (formData) => {
-  const response = await fetch(`${BASE_URL}/enquiries`, {
+ // const response = await fetch(`${BASE_URL}/enquiries`, {
+   const response = await fetch(ENQUIRY_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
