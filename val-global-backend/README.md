@@ -83,7 +83,7 @@ Server starts at: **http://localhost:8080**
 
 By default, enquiry emails are disabled for local development so form submissions can still be saved without SMTP credentials.
 
-The backend now supports generic SMTP environment variables, so you can use Gmail, Brevo, SendGrid, Titan, or any other provider that supports SMTP:
+The backend supports generic SMTP environment variables, and also supports Brevo's HTTP API (recommended when cloud platforms block SMTP ports):
 
 ```bash
 export MAIL_ENABLED=true
@@ -96,6 +96,7 @@ export SMTP_PASSWORD=YOUR_APP_PASSWORD
 export SMTP_STARTTLS_ENABLE=true
 export SMTP_STARTTLS_REQUIRED=true
 export SMTP_SSL_ENABLE=false
+export BREVO_API_KEY=
 mvn spring-boot:run
 ```
 
@@ -112,6 +113,7 @@ export SMTP_PASSWORD=YOUR_BREVO_SMTP_KEY
 export SMTP_STARTTLS_ENABLE=true
 export SMTP_STARTTLS_REQUIRED=false
 export SMTP_SSL_ENABLE=false
+export BREVO_API_KEY=YOUR_BREVO_API_KEY
 mvn spring-boot:run
 ```
 
@@ -139,6 +141,7 @@ export SMTP_PASSWORD='YOUR_APP_PASSWORD'
 export SMTP_STARTTLS_ENABLE=true
 export SMTP_STARTTLS_REQUIRED=true
 export SMTP_SSL_ENABLE=false
+export BREVO_API_KEY=''
 ```
 
 Frontend example:

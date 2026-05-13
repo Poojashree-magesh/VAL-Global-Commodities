@@ -4,6 +4,8 @@ import com.valglobal.dto.EnquiryDTO;
 import com.valglobal.model.Enquiry;
 import com.valglobal.model.Enquiry.EnquiryStatus;
 import com.valglobal.repository.EnquiryRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,10 +13,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.util.StringUtils;
 
 import jakarta.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,8 +32,11 @@ import java.util.Optional;
 @Slf4j
 public class EnquiryService {
 
+    private static final String BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+
     private final EnquiryRepository enquiryRepository;
     private final JavaMailSender mailSender;
+    private final ObjectMapper objectMapper;
 
     @Value("${app.mail.to:info@valglobalcommodities.com}")
     private String notificationEmail;
@@ -33,6 +46,9 @@ public class EnquiryService {
 
     @Value("${app.mail.from:}")
     private String mailFrom;
+
+    @Value("${app.mail.brevo.api-key:}")
+    private String brevoApiKey;
 
     /**
      * Save a new enquiry and send email notification
@@ -66,8 +82,33 @@ public class EnquiryService {
             return saved;
         }
 
-        // ================= EMAIL SENDING =================
+        String enquiryType = Boolean.TRUE.equals(saved.getCatalogueRequested())
+                ? "Catalogue Request"
+                : "General Enquiry";
+
+        String content =
+                "<h2>New Enquiry Received</h2>" +
+                "<p><b>Request Type:</b> " + enquiryType + "</p>" +
+                "<p><b>Name:</b> " + saved.getFirstName() + " " + saved.getLastName() + "</p>" +
+                "<p><b>Email:</b> " + saved.getEmail() + "</p>" +
+                "<p><b>Phone:</b> " + saved.getPhone() + "</p>" +
+                "<p><b>Company:</b> " + saved.getCompany() + "</p>" +
+                "<p><b>Country:</b> " + saved.getCountry() + "</p>" +
+                "<p><b>Product Interest:</b> " + saved.getProductInterest() + "</p>" +
+                "<p><b>Message:</b><br/>" + saved.getMessage() + "</p>";
+
+        String subject = enquiryType + " - " + saved.getFirstName() + " " + saved.getLastName();
+
+        // ================= EMAIL SENDING (Brevo API first, SMTP fallback) =================
         try {
+            if (StringUtils.hasText(brevoApiKey)) {
+                sendViaBrevoApi(saved, subject, content);
+                log.info("Email sent successfully via Brevo API to {}", notificationEmail);
+                return saved;
+            }
+
+            log.info("BREVO_API_KEY not set. Falling back to SMTP transport.");
+
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
             // true = multipart (safer for HTML emails)
@@ -82,21 +123,7 @@ public class EnquiryService {
             // ✅ Reply goes to customer
             helper.setReplyTo(saved.getEmail());
 
-            String enquiryType = Boolean.TRUE.equals(saved.getCatalogueRequested())
-                    ? "Catalogue Request"
-                    : "General Enquiry";
-            helper.setSubject(enquiryType + " - " + saved.getFirstName() + " " + saved.getLastName());
-
-            String content =
-                    "<h2>New Enquiry Received</h2>" +
-                    "<p><b>Request Type:</b> " + enquiryType + "</p>" +
-                    "<p><b>Name:</b> " + saved.getFirstName() + " " + saved.getLastName() + "</p>" +
-                    "<p><b>Email:</b> " + saved.getEmail() + "</p>" +
-                    "<p><b>Phone:</b> " + saved.getPhone() + "</p>" +
-                    "<p><b>Company:</b> " + saved.getCompany() + "</p>" +
-                    "<p><b>Country:</b> " + saved.getCountry() + "</p>" +
-                    "<p><b>Product Interest:</b> " + saved.getProductInterest() + "</p>" +
-                    "<p><b>Message:</b><br/>" + saved.getMessage() + "</p>";
+            helper.setSubject(subject);
 
             helper.setText(content, true); // HTML email
 
@@ -110,6 +137,43 @@ public class EnquiryService {
         // =================================================
 
         return saved;
+    }
+
+    private void sendViaBrevoApi(Enquiry enquiry, String subject, String htmlContent) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("api-key", brevoApiKey);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        Map<String, Object> sender = new HashMap<>();
+        sender.put("email", mailFrom);
+        sender.put("name", "VAL Global Commodities");
+
+        Map<String, Object> toEmail = new HashMap<>();
+        toEmail.put("email", notificationEmail);
+        List<Map<String, Object>> to = new ArrayList<>();
+        to.add(toEmail);
+
+        Map<String, Object> replyTo = new HashMap<>();
+        replyTo.put("email", enquiry.getEmail());
+        replyTo.put("name", enquiry.getFirstName() + " " + enquiry.getLastName());
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("sender", sender);
+        payload.put("to", to);
+        payload.put("subject", subject);
+        payload.put("htmlContent", htmlContent);
+        payload.put("replyTo", replyTo);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(BREVO_API_URL, request, String.class);
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            throw new IllegalStateException("Brevo API call failed with status: " + response.getStatusCode());
+        }
+
+        log.debug("Brevo API send response: {}", objectMapper.writeValueAsString(response.getBody()));
     }
 
     public List<Enquiry> getAllEnquiries() {
