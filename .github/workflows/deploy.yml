@@ -19,7 +19,6 @@ jobs:
           username: zcmtsivgo8mu
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script_stop: true
           script: |
             set -e
             cd /home/zcmtsivgo8mu/repositories/VAL-Global-Commodities
