@@ -86,7 +86,7 @@ $htmlBody =
 
 $payload = [
     'sender' => [
-        'name' => 'Val',
+        'name' => 'Val Global Commodities',
         'email' => 'enquiries@valglobalcommodities.com'
     ],
     'to' => [
