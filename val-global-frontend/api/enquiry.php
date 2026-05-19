@@ -1,10 +1,12 @@
 <?php
 header('Content-Type: application/json');
 
-$smtpHost = 'mail.valglobalcommodities.com';
-$smtpPort = 587;
-$smtpUsername = 'info@valglobalcommodities.com';
-$smtpPassword = 'PASTE_EMAIL_PASSWORD_HERE';
+$config = require '/home/zcmtsivgo8mu/secure-config.php';
+
+$smtpHost = $config['smtp_host'];
+$smtpPort = $config['smtp_port'];
+$smtpUsername = $config['smtp_username'];
+$smtpPassword = $config['smtp_password'];
 $smtpTimeout = 20;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
