@@ -59,8 +59,11 @@ function smtp_address($email, $name = '') {
 }
 
 function smtp_send_mail($config, $to, $from, $fromName, $replyTo, $replyToName, $subject, $body) {
+
+    $transport = ($config['port'] == 465) ? 'ssl://' : 'tcp://';
+
     $socket = stream_socket_client(
-        'tcp://' . $config['host'] . ':' . $config['port'],
+        $transport . $config['host'] . ':' . $config['port'],
         $errno,
         $errstr,
         $config['timeout'],
@@ -76,16 +79,26 @@ function smtp_send_mail($config, $to, $from, $fromName, $replyTo, $replyToName, 
     try {
         smtp_expect($socket, 220);
         smtp_command($socket, 'EHLO valglobalcommodities.com', 250);
-        smtp_command($socket, 'STARTTLS', 220);
 
-        if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-            throw new Exception('SMTP STARTTLS failed');
+        // Only STARTTLS for port 587
+        if ($config['port'] != 465) {
+            smtp_command($socket, 'STARTTLS', 220);
+
+            if (!stream_socket_enable_crypto(
+                $socket,
+                true,
+                STREAM_CRYPTO_METHOD_TLS_CLIENT
+            )) {
+                throw new Exception('SMTP STARTTLS failed');
+            }
+
+            smtp_command($socket, 'EHLO valglobalcommodities.com', 250);
         }
 
-        smtp_command($socket, 'EHLO valglobalcommodities.com', 250);
         smtp_command($socket, 'AUTH LOGIN', 334);
         smtp_command($socket, base64_encode($config['username']), 334);
         smtp_command($socket, base64_encode($config['password']), 235);
+
         smtp_command($socket, 'MAIL FROM:<' . $from . '>', 250);
         smtp_command($socket, 'RCPT TO:<' . $to . '>', 250);
         smtp_command($socket, 'DATA', 354);
@@ -106,11 +119,13 @@ function smtp_send_mail($config, $to, $from, $fromName, $replyTo, $replyToName, 
         $message = str_replace(["\r\n.", "\n."], ["\r\n..", "\n.."], $message);
 
         fwrite($socket, $message . "\r\n.\r\n");
+
         smtp_expect($socket, 250);
         smtp_command($socket, 'QUIT', 221);
 
         fclose($socket);
         return true;
+
     } catch (Exception $e) {
         fclose($socket);
         throw $e;
