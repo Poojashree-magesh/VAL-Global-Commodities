@@ -73,15 +73,15 @@ $emailBody =
 
 $htmlBody =
     '<div style="font-family: Arial, sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 20px;">' .
-    '<h2 style="margin-top: 0;">New Enquiry Received</h2>' .
-    '<p><b>Request Type:</b> ' . esc($requestType) . '</p>' .
-    '<p><b>Name:</b> ' . esc($name) . '</p>' .
-    '<p><b>Email:</b> <a href="mailto:' . esc($email) . '">' . esc($email) . '</a></p>' .
-    '<p><b>Phone:</b> ' . esc($phone) . '</p>' .
-    '<p><b>Company:</b> ' . esc($company) . '</p>' .
-    '<p><b>Country:</b> ' . esc($country) . '</p>' .
-    '<p><b>Product Interest:</b> ' . esc($productInterest) . '</p>' .
-    '<p><b>Message:</b><br/>' . nl2br(esc($message)) . '</p>' .
+    '<h2 style="margin-top: 0; font-weight: 600;">New Enquiry Received</h2>' .
+    '<p><span style="font-weight: 600;">Request Type:</span> ' . esc($requestType) . '</p>' .
+    '<p><span style="font-weight: 600;">Name:</span> ' . esc($name) . '</p>' .
+    '<p><span style="font-weight: 600;">Email:</span> <a href="mailto:' . esc($email) . '">' . esc($email) . '</a></p>' .
+    '<p><span style="font-weight: 600;">Phone:</span> ' . esc($phone) . '</p>' .
+    '<p><span style="font-weight: 600;">Company:</span> ' . esc($company) . '</p>' .
+    '<p><span style="font-weight: 600;">Country:</span> ' . esc($country) . '</p>' .
+    '<p><span style="font-weight: 600;">Product Interest:</span> ' . esc($productInterest) . '</p>' .
+    '<p><span style="font-weight: 600;">Message:</span><br/>' . nl2br(esc($message)) . '</p>' .
     '</div>';
 
 $payload = [
