@@ -34,6 +34,10 @@ function clean_message($value) {
     return trim((string)($value ?? ''));
 }
 
+function esc($value) {
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+}
+
 $firstName = clean_text($data['firstName'] ?? '');
 $lastName = clean_text($data['lastName'] ?? '');
 $email = filter_var(clean_text($data['email'] ?? ''), FILTER_VALIDATE_EMAIL);
@@ -54,21 +58,35 @@ if ($firstName === '' || $lastName === '' || !$email) {
 }
 
 $name = trim($firstName . ' ' . $lastName);
+$requestType = $catalogueRequested === 'Yes' ? 'Catalogue Request' : 'General Enquiry';
 
 $emailBody =
-    "New enquiry received from the VAL Global Commodities website.\n\n" .
+    "New Enquiry Received\n\n" .
+    "Request Type: {$requestType}\n" .
     "Name: {$name}\n" .
     "Email: {$email}\n" .
     "Phone: {$phone}\n" .
     "Company: {$company}\n" .
     "Country: {$country}\n" .
-    "Product Interest: {$productInterest}\n" .
-    "Catalogue Requested: {$catalogueRequested}\n\n" .
+    "Product Interest: {$productInterest}\n\n" .
     "Message:\n{$message}\n";
+
+$htmlBody =
+    '<div style="font-family: Arial, sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 20px;">' .
+    '<h2 style="margin-top: 0;">New Enquiry Received</h2>' .
+    '<p><b>Request Type:</b> ' . esc($requestType) . '</p>' .
+    '<p><b>Name:</b> ' . esc($name) . '</p>' .
+    '<p><b>Email:</b> <a href="mailto:' . esc($email) . '">' . esc($email) . '</a></p>' .
+    '<p><b>Phone:</b> ' . esc($phone) . '</p>' .
+    '<p><b>Company:</b> ' . esc($company) . '</p>' .
+    '<p><b>Country:</b> ' . esc($country) . '</p>' .
+    '<p><b>Product Interest:</b> ' . esc($productInterest) . '</p>' .
+    '<p><b>Message:</b><br/>' . nl2br(esc($message)) . '</p>' .
+    '</div>';
 
 $payload = [
     'sender' => [
-        'name' => 'VAL Global Commodities',
+        'name' => 'Val',
         'email' => 'enquiries@valglobalcommodities.com'
     ],
     'to' => [
@@ -76,7 +94,8 @@ $payload = [
             'email' => 'info@valglobalcommodities.com'
         ]
     ],
-    'subject' => 'New Enquiry - ' . $name,
+    'subject' => $requestType . ' - ' . $name,
+    'htmlContent' => $htmlBody,
     'textContent' => $emailBody,
     'replyTo' => [
         'email' => $email,
