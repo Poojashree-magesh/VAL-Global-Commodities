@@ -1,5 +1,14 @@
+# ---
+# deployment:
+#   tasks:
+#     - export DEPLOYPATH=/home/zcmtsivgo8mu/public_html/
+#     - /bin/cp -R val-global-frontend/dist/* $DEPLOYPATH
+
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/zcmtsivgo8mu/public_html/
+    - export DEPLOYPATH=/home/zcmtsivgo8mu/public_html
+    - /bin/rm -rf $DEPLOYPATH/*
     - /bin/cp -R val-global-frontend/dist/* $DEPLOYPATH
+    - /bin/mkdir -p $DEPLOYPATH/api
+    - /bin/cp -R val-global-frontend/api/* $DEPLOYPATH/api
