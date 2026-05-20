@@ -99,7 +99,7 @@ const PRODUCTS = [
     icon: "🥥",
     title: "Coconut-Based Products",
     catLabel: "Coconut",
-    items: "Fresh Coconut, Copra, Desiccated Coconut, Cold-Pressed Coconut Oil",
+    items: "Fresh Coconut, Copra, Desiccated Coconut, Cold-Pressed Coconut Oil, Virgin Coconut Oil",
     tags: ["Bulk & Trade", "Export Pack", "Wholesale"],
     img: "/images/coconut.webp",
   },

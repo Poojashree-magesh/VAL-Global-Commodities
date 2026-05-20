@@ -1,7 +1,7 @@
 import { StaggerReveal } from './SectionReveal'
 
 const features = [
-  { icon:'🌱', title:'Farm Direct Sourcing', desc:'No intermediaries, full traceability' },
+  { icon:'🌱', title:'Farm Direct Sourcing', desc:'No intermediaries, Ethical sourcing' },
   { icon:'✅', title:'Export-Grade Quality', desc:'Meets international standards' },
   { icon:'🌿', title:'Chemical-Free Products', desc:'Traditional & natural farming' },
   { icon:'📦', title:'Reliable Bulk Supply', desc:'Consistent & scalable delivery' },
